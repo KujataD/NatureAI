@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="シェーダー ファイル">
+      <UniqueIdentifier>{718c7f4c-fc51-40ad-a221-b9456a7a1a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject">
+      <UniqueIdentifier>{98e0d807-a7f5-4c54-8946-6f335cd759d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Player">
+      <UniqueIdentifier>{6fdfbbcd-e4f0-4070-81c7-1c53f2d62622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math">
+      <UniqueIdentifier>{580ff1a6-2db6-410c-ad15-27953536ed3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Model">
+      <UniqueIdentifier>{f3a2f946-991f-4ddd-a9f1-5ca1eaf4bd69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Model\Skydome">
+      <UniqueIdentifier>{b00f99e0-30e1-4a79-b1e8-6c1171646676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Time">
+      <UniqueIdentifier>{c6e14aff-8cf9-4e26-b4c4-37a4168526a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Camera">
+      <UniqueIdentifier>{2ca25ccb-5359-466e-88ed-e775cd5fc008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Ememy">
+      <UniqueIdentifier>{7bf1a399-3d41-447f-ba1c-662535e0c886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Particle">
+      <UniqueIdentifier>{ae76ff42-9128-419a-a31b-f0a22fdc9620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Transition">
+      <UniqueIdentifier>{bc4b989f-ec87-4551-90f3-1640b001831f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{6e33e391-16ea-48b9-9d13-258960ae2aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Ememy\Enemy">
+      <UniqueIdentifier>{fe95f40d-5ace-4b5f-abbe-c5df2dad395c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Ememy\ShieldEnemy">
+      <UniqueIdentifier>{e32362e5-8fc4-42a7-9495-780d04ebadcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MapChipField">
+      <UniqueIdentifier>{5f3535e4-9b54-4b78-9013-56c8616b8a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Stage">
+      <UniqueIdentifier>{28f62a52-152e-4c22-bfcf-d328b36280dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Ememy\ChaseEnemy">
+      <UniqueIdentifier>{814d77c1-5e59-43ff-a58d-3f2b285a1eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Algorithm">
+      <UniqueIdentifier>{91ae0fdb-9ecc-4612-b879-734551abcaa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Algorithm\AI">
+      <UniqueIdentifier>{ed72144e-f241-4102-a49a-e90a9632a7df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Algorithm\AI\NavigationAI">
+      <UniqueIdentifier>{bccd9bf6-e143-48bc-9b3f-be05da4baceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Algorithm\AI\NavigationAI\AStar">
+      <UniqueIdentifier>{b7ca3cd8-dbf1-4715-9b5e-86abf7e18718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Algorithm\AI\CharactorAI">
+      <UniqueIdentifier>{81038c01-19c8-4dc0-a340-e9e166a091fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\Minion">
+      <UniqueIdentifier>{58f110ce-d1b6-4301-8ba3-4229e1499ec5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4x4.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Skydome.cpp">
+      <Filter>ソース ファイル\Model\Skydome</Filter>
+    </ClCompile>
+    <ClCompile Include="MapChipField.cpp">
+      <Filter>ソース ファイル\MapChipField</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>ソース ファイル\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル\GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathParticles.cpp">
+      <Filter>ソース ファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ソース ファイル\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBehaviorAttack.cpp">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBehaviorRoot.cpp">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="HitEffect.cpp">
+      <Filter>ソース ファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBehaviorDead.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBehaviorRoot.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ShieldEnemy.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ShieldEnemyBehaviorDead.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ShieldEnemyBehaviorRoot.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GuardEffect.cpp">
+      <Filter>ソース ファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBehaviorKnockback.cpp">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ShieldEnemyBehaviorGuard.cpp">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>ソース ファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="AStar.cpp">
+      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\AStar</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
+      <Filter>ソース ファイル\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider3D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\SpritePS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteVS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ShapeVS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ShapePS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ObjPS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ObjVS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PrimitivePS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PrimitiveVS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\TerrainVS.hlsl">
+      <Filter>シェーダー ファイル</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\Sprite.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\Shape.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\Obj.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\Primitive.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\Terrain.hlsli">
+      <Filter>シェーダー ファイル</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Skydome.h">
+      <Filter>ソース ファイル\Model\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="MapChipField.h">
+      <Filter>ソース ファイル\MapChipField</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>ソース ファイル\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>ソース ファイル\GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathParticles.h">
+      <Filter>ソース ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>ソース ファイル\Transition</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlayerBehavior.h">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBehaviorAttack.h">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBehaviorRoot.h">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="HitEffect.h">
+      <Filter>ソース ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>ソース ファイル\GameObject\Ememy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBehaviorDead.h">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBehaviorRoot.h">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnemyBehaviorState.h">
+      <Filter>ソース ファイル\GameObject\Ememy\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ShieldEnemy.h">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ShieldEnemyBehaviorDead.h">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ShieldEnemyBehaviorRoot.h">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="IShieldEnemyBehaviorState.h">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="LRDirection.h">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GuardEffect.h">
+      <Filter>ソース ファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBehaviorKnockback.h">
+      <Filter>ソース ファイル\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ShieldEnemyBehaviorGuard.h">
+      <Filter>ソース ファイル\GameObject\Ememy\ShieldEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>ソース ファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar.h">
+      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\AStar</Filter>
+    </ClInclude>
+    <ClInclude Include="Minion.h">
+      <Filter>ソース ファイル\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider3D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
