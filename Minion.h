@@ -28,15 +28,18 @@ public:
 		path_ = path;
 		currentStep_ = 0;
 	}
-	void SetPlayerPos(const KamataEngine::Vector3& playerPos) { playerPos_ = playerPos; }
 
 private:
+
+	KamataEngine::Vector3 Limit(KamataEngine::Vector3 v, float max);
 	void Move();
+	KamataEngine::Vector3 Steer(const KamataEngine::Vector3& targetPos);
 
 private:
 	static inline const float kMoveSpeed = 0.05f;
 	static inline const float kAcceleration = 0.01f;
-	static inline const float kMaxSpeed = 0.09f;
+	static inline const float kMaxSpeed = 0.09f; // 最高スピード
+	static inline const float kMaxSteer = 0.003f; // ハンドルの切れやすさ
 
 private:
 	KamataEngine::Camera* camera_ = nullptr;
@@ -44,12 +47,15 @@ private:
 	KamataEngine::ObjectColor* objColor_ = nullptr;
 	MapChipField* mapChipField_ = nullptr;
 
+	// ワールドトランスフォーム
 	KamataEngine::WorldTransform worldTransform_;
-	KamataEngine::Vector3 playerPos_;
+	
+	// 速度
 	KamataEngine::Vector3 velocity_;
 
 	// 経路
 	std::vector<MapChipField::IndexSet> path_;
+	
 	// 現在のステップ
 	int32_t currentStep_ = 0;
 };

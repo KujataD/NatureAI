@@ -29,6 +29,18 @@ void Minion::Update() {
 
 void Minion::Draw() { model_->Draw(worldTransform_, *camera_, objColor_); }
 
+KamataEngine::Vector3 Minion::Limit(Vector3 v, float max) {
+	float length = Length(v);
+	if (length > max) {
+		Vector3 result = Normalize(v);
+		result.x *= max;
+		result.y *= max;
+		result.z *= max;
+		return result;
+	}
+	return v;
+}
+
 void Minion::Move() {
 	if (path_.empty()) {
 		return;
@@ -41,17 +53,34 @@ void Minion::Move() {
 	// 次のゴール地点
 	Vector3 goalPos = mapChipField_->GetMapChipPositionByIndex(path_[currentStep_ + 1].xIndex, path_[currentStep_ + 1].zIndex);
 
+	//// 進行方向を取得
+	// Vector3 direction = goalPos - worldTransform_.translation_;
+	// direction = MathUtility::Normalize(direction) ;
+
+	Vector3 steer = Steer(goalPos);
+	velocity_ += steer;
+	velocity_ = Limit(velocity_, kMaxSpeed);
+	worldTransform_.translation_ += velocity_;
+
 	// 現時点のインデックスセット
 	MapChipField::IndexSet currentIdxSet = mapChipField_->GetMapChipIndexSetByPosition(worldTransform_.translation_);
-
-	// 進行方向を取得
-	Vector3 direction = goalPos - worldTransform_.translation_;
-	direction = Normalize(direction);
-
-	worldTransform_.translation_ += direction * kMoveSpeed;
 
 	// 同じマスに到着したら次のマスを目指す。
 	if (currentIdxSet == path_[currentStep_ + 1]) {
 		currentStep_++;
 	}
+}
+
+KamataEngine::Vector3 Minion::Steer(const KamataEngine::Vector3& targetPos) {
+	// 目標速度を求める
+	Vector3 desired = targetPos - worldTransform_.translation_;
+	desired = Normalize(desired) * kMaxSpeed;
+
+	// どれくらい速度を変化させるか
+	Vector3 steer = desired - velocity_;
+
+	// 急なハンドリングを防ぐ
+	steer = Limit(steer, kMaxSteer);
+
+	return steer;
 }

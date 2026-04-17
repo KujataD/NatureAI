@@ -407,20 +407,9 @@ Vector3 Player::CornerPosition(const Vector3& center, Corner corner) {
 
 void Player::ApplyCollision(const CollisionMapInfo& info) { worldTransform_.translation_ += info.moveAmount; }
 
-void Player::OnCeiling(const CollisionMapInfo& info) {
-	// 天井に当たった?
-	if (info.isCeiling) {
-		DebugText::GetInstance()->ConsolePrintf("hit ceiling\n");
-		velocity_.y = 0;
-	}
-}
+void Player::OnCeiling(const CollisionMapInfo& info) { (void)info; }
 
-void Player::OnWall(const CollisionMapInfo& info) {
-	if (info.isWall) {
-		velocity_.x *= (1.0f - kAttenuationWall);
-		velocity_.z *= (1.0f - kAttenuationWall);
-	}
-}
+void Player::OnWall(const CollisionMapInfo& info) { (void)info; }
 
 void Player::OnGround(const CollisionMapInfo& info) { info; }
 

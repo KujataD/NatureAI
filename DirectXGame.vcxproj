@@ -194,8 +194,10 @@
     <ClCompile Include="ShieldEnemyBehaviorRoot.cpp" />
     <ClCompile Include="Skydome.cpp" />
     <ClCompile Include="StageManager.cpp" />
+    <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -331,8 +333,10 @@
     <ClInclude Include="ShieldEnemyBehaviorRoot.h" />
     <ClInclude Include="Skydome.h" />
     <ClInclude Include="StageManager.h" />
+    <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
