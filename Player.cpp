@@ -243,10 +243,20 @@ void Player::SetSizeEaseOut(const KamataEngine::Vector3& startSize, const Kamata
 }
 
 void Player::CheckMapCollision(CollisionMapInfo& info) {
-	CheckMapCollisionUp(info);
-	CheckMapCollisionDown(info);
-	CheckMapCollisionLeft(info);
-	CheckMapCollisionRight(info);
+	CollisionMapInfo infoZ = info;
+	infoZ.moveAmount.x = 0.0f;
+	CheckMapCollisionUp(infoZ);
+	CheckMapCollisionDown(infoZ);
+
+	CollisionMapInfo infoX = info;
+	infoX.moveAmount.z = 0.0f;
+	CheckMapCollisionLeft(infoX);
+	CheckMapCollisionRight(infoX);
+
+	info.moveAmount.x = infoX.moveAmount.x;
+	info.moveAmount.z = infoZ.moveAmount.z;
+	info.isWall = infoX.isWall || infoZ.isWall;
+	info.isGround = infoX.isGround || infoZ.isGround;
 }
 
 void Player::CheckMapCollisionUp(CollisionMapInfo& info) {
