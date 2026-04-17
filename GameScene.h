@@ -56,7 +56,7 @@ private:
 	/// </summary>
 	void ChangePhase();
 
-	void PaintPath(MapChipField::IndexSet startIdx);
+	void PaintPath(const std::vector<MapChipField::IndexSet> path);
 
 private: // enum
 	enum class Phase {
@@ -90,6 +90,7 @@ private: // 変数
 
 	// 床の色
 	std::vector<std::vector<KamataEngine::ObjectColor*>> floorColors_;
+	KamataEngine::ObjectColor* wallColor_ = nullptr;
 
 	// A*
 	AStar aStar_;

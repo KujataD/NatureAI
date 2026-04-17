@@ -27,6 +27,9 @@ void Player::Init(Model* model, Model* modelAttack, Camera* camera, const Vector
 	model_ = Model::CreateSphere();
 	modelAttack_ = modelAttack;
 	camera_ = camera;
+	objColor_ = new ObjectColor;
+	objColor_->Initialize();
+	objColor_->SetColor({0.2f, 0.2f, 0.2f, 1.0f});
 
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
@@ -70,7 +73,7 @@ void Player::Draw() {
 	if (isDead_) {
 		return;
 	}
-	model_->Draw(worldTransform_, *camera_);
+	model_->Draw(worldTransform_, *camera_, objColor_);
 
 	if (isActiveAttackFX_) {
 		// 表面の攻撃エフェクト

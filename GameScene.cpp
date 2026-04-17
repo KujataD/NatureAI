@@ -22,6 +22,7 @@ GameScene::~GameScene() {
 	delete player_;
 	delete mapChipField_;
 	delete deathParticles_;
+	delete wallColor_;
 
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
@@ -63,6 +64,9 @@ void GameScene::Init(StageManager* stageDataManager) {
 	// ブロックモデルの生成
 	blockModel_ = Model::CreateFromOBJ("block", true);
 	floorModel_ = Model::CreateFromOBJ("floor", true);
+	wallColor_ = new ObjectColor;
+	wallColor_->Initialize();
+	wallColor_->SetColor({0.1f, 0.1f, 0.1f, 1.0f});
 
 	// カメラの初期化
 	camera_.Initialize();
@@ -267,6 +271,7 @@ void GameScene::Update() {
 			std::vector<MapChipField::IndexSet> path = aStar_.FindPath(minionIdx, goalIdx);
 			// パスをセット
 			minion_->SetPas(path);
+			PaintPath(path);
 		}
 		minion_->Update();
 
@@ -464,7 +469,7 @@ void GameScene::Draw() {
 				blockModel_->Draw(*worldTransformBlock, camera_, floorColors_[z][x]);
 
 			} else {
-				floorModel_->Draw(*worldTransformBlock, camera_);
+				blockModel_->Draw(*worldTransformBlock, camera_, wallColor_);
 			}
 		}
 	}
@@ -493,6 +498,8 @@ void GameScene::Draw() {
 	for (GuardEffect* guardEffect : guardEffects_) {
 		guardEffect->Draw();
 	}
+
+
 
 	// 3Dモデル描画後処理
 	Model::PostDraw();
@@ -528,8 +535,8 @@ void GameScene::GenerateFieldObjects() {
 				// タイルごとに色オブジェクトを生成
 				KamataEngine::ObjectColor* color = new KamataEngine::ObjectColor();
 				color->Initialize();
-				color->SetColor({1, 1, 1, 1}); // デフォルト白
-				floorColors_[z][x] = color;    // 追加
+				color->SetColor({1, 1, 1, 1}); 
+				floorColors_[z][x] = color;    
 			}
 
 			switch (mapChipField_->GetMapChipTypeByIndex(x, z)) {
@@ -538,6 +545,7 @@ void GameScene::GenerateFieldObjects() {
 				worldTransform->Initialize();
 				worldTransformBlocks_[z][x] = worldTransform;
 				worldTransformBlocks_[z][x]->translation_ = mapChipField_->GetMapChipPositionByIndex(x, z);
+				   
 				break;
 			}
 			case MapChipType::kPlayer: {
@@ -667,14 +675,7 @@ void GameScene::ChangePhase() {
 		break;
 	}
 }
-void GameScene::PaintPath(MapChipField::IndexSet startIdx) {
-
-	// プレイヤーのインデックスを取得
-	MapChipField::IndexSet goalIdx = mapChipField_->GetMapChipIndexSetByPosition(player_->GetWorldPosition());
-
-	// A*で経路探索
-	std::vector<MapChipField::IndexSet> path = aStar_.FindPath(startIdx, goalIdx);
-
+void GameScene::PaintPath(const std::vector<MapChipField::IndexSet> path) {
 	uint32_t numZ = mapChipField_->GetNumBlockVirtical();
 	uint32_t numX = mapChipField_->GetNumBlockHorizontal();
 
@@ -689,8 +690,4 @@ void GameScene::PaintPath(MapChipField::IndexSet startIdx) {
 	for (auto& idx : path) {
 		floorColors_[idx.zIndex][idx.xIndex]->SetColor({0, 1, 0, 1}); // 緑
 	}
-
-	// スタートとゴールを強調
-	floorColors_[startIdx.zIndex][startIdx.xIndex]->SetColor({1, 0, 0, 1}); // 赤
-	floorColors_[goalIdx.zIndex][goalIdx.xIndex]->SetColor({0, 0, 1, 1});   // 青
 }

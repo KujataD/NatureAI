@@ -43,7 +43,7 @@ void LoadDebugSettings();
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 
 	// エンジンの初期化
-	KamataEngine::Initialize(L"LC1B_07_オオツカ_ダイチ_AL2");
+	KamataEngine::Initialize(L"LC1B_07_オオツカ_ダイチ_NatureAI");
 
 	// DirectXCommonのインスタンスを取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();

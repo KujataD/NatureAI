@@ -69,7 +69,8 @@ public:
 	// ------------------------------------------
 
 	// --- set ---
-
+	void SetColor(const KamataEngine::Vector4& color) { objColor_->SetColor(color); }
+	
 	void SetMapChipField(MapChipField* mapChipField) { mapChipField_ = mapChipField; }
 	void SetActiveAttackFX(bool isActive) { isActiveAttackFX_ = isActive; }
 	void DecreaseAttackCount(int value) { attackCounter_ -= value; }
@@ -320,6 +321,8 @@ private:
 
 	// モデル
 	KamataEngine::Model* model_ = nullptr;
+
+	KamataEngine::ObjectColor* objColor_ = nullptr;
 
 	// テクスチャモデル
 	// uint32_t textureHandle_ = 0u;

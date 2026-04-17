@@ -21,15 +21,14 @@ std::vector<MapChipField::IndexSet> AStar::FindPath(MapChipField::IndexSet start
 
 	// 優先度付きキューを用いて、次に調べる候補ノードをここにいれる
 	std::priority_queue<Node*, std::vector<Node*>, CompareFCost> openList;
+	// オープンリストに入っている場所のリスト
+	std::vector<std::vector<bool>> inOpen(mapChipField_->GetNumBlockVirtical(), std::vector<bool>(mapChipField_->GetNumBlockHorizontal(), false));
 
 	// 記録してきたすべてのノード
 	std::vector<Node*> allNodes;
 
 	// すでに調べた場所
 	std::vector<std::vector<bool>> closed(mapChipField_->GetNumBlockVirtical(), std::vector<bool>(mapChipField_->GetNumBlockHorizontal(), false));
-
-	// オープンリストに入っている場所のリスト
-	std::vector<std::vector<bool>> inOpen(mapChipField_->GetNumBlockVirtical(), std::vector<bool>(mapChipField_->GetNumBlockHorizontal(), false));
 
 	// --- スタートノード ---
 	Node* startNode = new Node(start.xIndex, start.zIndex);
@@ -125,7 +124,15 @@ std::vector<MapChipField::IndexSet> AStar::FindPath(MapChipField::IndexSet start
 
 			// 近接ノード
 			Node* neighbor = new Node(neighborX, neighborZ);
-			float stepCost = isDiagonal ? std::numbers::sqrt2_v<float> : 1.0f; // 斜め移動の時はコストを上げる
+			float stepCost; 
+			
+			// 斜め移動の時のコストはroot2
+			if (isDiagonal) {
+				stepCost = std::numbers::sqrt2_v<float>;
+			} else {
+				stepCost = 1.0f;
+			}
+
 			neighbor->g = currentNode->g + stepCost;
 			neighbor->h = Heuristic({(uint32_t)neighborX, (uint32_t)neighborZ}, goal);
 			neighbor->f = neighbor->g + neighbor->h;
