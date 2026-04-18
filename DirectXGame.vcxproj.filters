@@ -195,6 +195,9 @@
     <ClCompile Include="SteeringBehavior.cpp">
       <Filter>ソース ファイル\Algorithm\AI\NavigationAI\SteeringBehavior</Filter>
     </ClCompile>
+    <ClCompile Include="MinionManager.cpp">
+      <Filter>ソース ファイル\GameObject\Minion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpritePS.hlsl">
@@ -365,6 +368,9 @@
     </ClInclude>
     <ClInclude Include="AABB.h">
       <Filter>ソース ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionManager.h">
+      <Filter>ソース ファイル\GameObject\Minion</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

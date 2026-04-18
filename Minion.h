@@ -41,6 +41,9 @@ private:
 	static inline const float kMaxSpeed = 0.075f; // 最高スピード
 	static inline const float kMaxSteer = 0.005f; // ハンドルの切れやすさ
 
+	static inline const float kSeparationRange = 1.0f;	// 分離の対象半径
+	static inline const float kSeparationWeight = 0.8f; // 分離の重み付け
+
 private:
 	KamataEngine::Camera* camera_ = nullptr;
 	KamataEngine::Model* model_ = nullptr;

@@ -182,6 +182,7 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Minion.cpp" />
+    <ClCompile Include="MinionManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBehaviorAttack.cpp" />
     <ClCompile Include="PlayerBehaviorKnockback.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Minion.h" />
+    <ClInclude Include="MinionManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBehaviorAttack.h" />
     <ClInclude Include="PlayerBehaviorKnockback.h" />

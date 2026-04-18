@@ -50,17 +50,12 @@ void Minion::Move() {
 		return;
 	}
 
-
-
 	// 次のゴール地点
 	Vector3 goalPos = mapChipField_->GetMapChipPositionByIndex(path_[currentStep_ + 1].xIndex, path_[currentStep_ + 1].zIndex);
 
-	//// 進行方向を取得
-	// Vector3 direction = goalPos - worldTransform_.translation_;
-	// direction = MathUtility::Normalize(direction) ;
-
-	Vector3 steer = Seek(goalPos);
-	velocity_ += steer;
+	// 追跡行動
+	Vector3 acceleration = Seek(goalPos);
+	velocity_ += acceleration;
 	velocity_ = Limit(velocity_, kMaxSpeed);
 	worldTransform_.translation_ += velocity_;
 

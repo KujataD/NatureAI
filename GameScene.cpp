@@ -137,7 +137,8 @@ void GameScene::Init(StageManager* stageDataManager) {
 	// ------------------------------------------
 	// ミニオン
 	//
-	modelMinion_ = Model::CreateSphere(); // モデル名は適宜変更
+	
+	modelMinion_ = Model::CreateFromOBJ("minion", true); // モデル名は適宜変更
 
 	minion_ = new Minion();
 	minion_->Init(modelMinion_, &camera_, mapChipField_->GetMapChipPositionByIndex(2, 2));
