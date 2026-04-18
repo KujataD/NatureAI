@@ -8,9 +8,9 @@ using namespace KamataEngine;
 // 無名ネームスペースで囲むことで内部リンケージを持つようになり、グローバル変数の名前の衝突を避けることができる。
 namespace {
 std::map<char, MapChipType> mapChipTypeTable = {
-    {'B', MapChipType::kBlock},
+    {'B', MapChipType::kBlock },
     {'P', MapChipType::kPlayer},
-    {'E', MapChipType::kEnemy},
+    {'E', MapChipType::kEnemy },
 };
 } // namespace
 
@@ -110,7 +110,16 @@ MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t zIndex
 	return mapChipData_.data[zIndex][xIndex].type;
 }
 
-uint8_t MapChipField::GetMapChipSubIDByIndex(uint32_t xIndex, uint32_t zIndex) const { return mapChipData_.data[zIndex][xIndex].subID;
-}
+uint8_t MapChipField::GetMapChipSubIDByIndex(uint32_t xIndex, uint32_t zIndex) const { return mapChipData_.data[zIndex][xIndex].subID; }
 
 Vector3 MapChipField::GetMapChipPositionByIndex(uint32_t xIndex, uint32_t zIndex) const { return Vector3(kBlockWidth * xIndex, 0, kBlockDepth * (kNumBlockDepth - 1 - zIndex)); }
+
+AABB MapChipField::GetAABBByIndex(uint32_t xIndex, uint32_t zIndex) { // 指定ブロックの中心座標を取得する
+	Vector3 center = GetMapChipPositionByIndex(xIndex, zIndex);
+
+	AABB aabb;
+	aabb.min = {center.x - kBlockWidth / 2.0f, center.y - kBlockWidth / 2.0f, center.z - kBlockWidth / 2.0f};
+	aabb.max = {center.x + kBlockWidth / 2.0f, center.y + kBlockWidth / 2.0f, center.z + kBlockWidth / 2.0f};
+
+	return aabb;
+}

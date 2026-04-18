@@ -33,13 +33,13 @@ private:
 
 	KamataEngine::Vector3 Limit(KamataEngine::Vector3 v, float max);
 	void Move();
-	KamataEngine::Vector3 Steer(const KamataEngine::Vector3& targetPos);
+	KamataEngine::Vector3 Seek(const KamataEngine::Vector3& targetPos);
 
 private:
 	static inline const float kMoveSpeed = 0.05f;
 	static inline const float kAcceleration = 0.01f;
-	static inline const float kMaxSpeed = 0.09f; // 最高スピード
-	static inline const float kMaxSteer = 0.003f; // ハンドルの切れやすさ
+	static inline const float kMaxSpeed = 0.075f; // 最高スピード
+	static inline const float kMaxSteer = 0.005f; // ハンドルの切れやすさ
 
 private:
 	KamataEngine::Camera* camera_ = nullptr;

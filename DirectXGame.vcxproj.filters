@@ -279,9 +279,6 @@
     <ClInclude Include="Rect.h">
       <Filter>ソース ファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>ソース ファイル\Math</Filter>
-    </ClInclude>
     <ClInclude Include="DeathParticles.h">
       <Filter>ソース ファイル\Particle</Filter>
     </ClInclude>
@@ -365,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="SteeringBehavior.h">
       <Filter>ソース ファイル\Algorithm\AI\NavigationAI\SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>ソース ファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

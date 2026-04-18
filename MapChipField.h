@@ -2,6 +2,7 @@
 #include <KamataEngine.h>
 #include <string>
 #include <vector>
+#include "AABB.h"
 
 enum class MapChipType {
 	kBlank,  // 空白
@@ -65,6 +66,8 @@ public:
 
 	uint32_t GetNumBlockVirtical() const { return kNumBlockDepth; }
 	uint32_t GetNumBlockHorizontal() const { return kNumBlockHorizontal; }
+
+	AABB GetAABBByIndex(uint32_t xIndex, uint32_t zIndex);
 
 private:
 	// 1ブロックのサイズ

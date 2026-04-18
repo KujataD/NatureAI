@@ -7,6 +7,7 @@
 #include "StageManager.h"
 
 using namespace KamataEngine;
+using namespace MathUtility;
 
 GameScene::GameScene() {}
 
@@ -262,16 +263,46 @@ void GameScene::Update() {
 		// プレイヤーのインデックスを取得
 		MapChipField::IndexSet goalIdx = mapChipField_->GetMapChipIndexSetByPosition(player_->GetWorldPosition());
 
-		if (goalIdx != prevGoalIdx_) {
-			// インデックス適応
-			prevGoalIdx_ = goalIdx;
-			// ミニオンのインデックスを取得
-			MapChipField::IndexSet minionIdx = mapChipField_->GetMapChipIndexSetByPosition(minion_->GetWorldPosition());
-			// パスを形成
-			std::vector<MapChipField::IndexSet> path = aStar_.FindPath(minionIdx, goalIdx);
-			// パスをセット
-			minion_->SetPas(path);
-			PaintPath(path);
+		// ミニオンとプレイヤーを結ぶ線分
+		Segment m2pSegment;
+		// ミニオンの座標
+		m2pSegment.origin = minion_->GetWorldPosition();
+		// プレイヤーの座標
+		m2pSegment.diff = player_->GetWorldPosition() - minion_->GetWorldPosition();
+
+		bool canSeePlayer = true;
+		for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
+			for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
+				AABB aabb;
+				aabb = {worldTransformBlock->translation_, worldTransformBlock->translation_};
+				aabb.min.x -= mapChipField_->GetBlockWidth() / 2.0f;
+				aabb.min.y -= mapChipField_->GetBlockWidth() / 2.0f;
+				aabb.min.z -= mapChipField_->GetBlockWidth() / 2.0f;
+				aabb.max.x += mapChipField_->GetBlockWidth() / 2.0f;
+				aabb.max.y += mapChipField_->GetBlockWidth() / 2.0f;
+				aabb.max.z += mapChipField_->GetBlockWidth() / 2.0f;
+				if (IsHitCollision(aabb, m2pSegment)) {
+					canSeePlayer = false;
+					break;
+				}
+			}
+			if (!canSeePlayer) {
+				break;
+			}
+		}
+		if (canSeePlayer) {
+			if (goalIdx != prevGoalIdx_) {
+				// インデックス適応
+				prevGoalIdx_ = goalIdx;
+				// ミニオンのインデックスを取得
+				MapChipField::IndexSet minionIdx = mapChipField_->GetMapChipIndexSetByPosition(minion_->GetWorldPosition());
+				// パスを形成
+				std::vector<MapChipField::IndexSet> path = aStar_.FindPath(minionIdx, goalIdx);
+				// パスをセット
+				minion_->SetPas(path);
+				// パスをカラー付けする
+				PaintPath(path);
+			}
 		}
 		minion_->Update();
 
@@ -499,8 +530,6 @@ void GameScene::Draw() {
 		guardEffect->Draw();
 	}
 
-
-
 	// 3Dモデル描画後処理
 	Model::PostDraw();
 	// ------------------------------------------
@@ -535,8 +564,8 @@ void GameScene::GenerateFieldObjects() {
 				// タイルごとに色オブジェクトを生成
 				KamataEngine::ObjectColor* color = new KamataEngine::ObjectColor();
 				color->Initialize();
-				color->SetColor({1, 1, 1, 1}); 
-				floorColors_[z][x] = color;    
+				color->SetColor({1, 1, 1, 1});
+				floorColors_[z][x] = color;
 			}
 
 			switch (mapChipField_->GetMapChipTypeByIndex(x, z)) {
@@ -545,7 +574,7 @@ void GameScene::GenerateFieldObjects() {
 				worldTransform->Initialize();
 				worldTransformBlocks_[z][x] = worldTransform;
 				worldTransformBlocks_[z][x]->translation_ = mapChipField_->GetMapChipPositionByIndex(x, z);
-				   
+
 				break;
 			}
 			case MapChipType::kPlayer: {
