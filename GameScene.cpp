@@ -4,6 +4,7 @@
 #include "HitEffect.h"
 #include "Matrix4x4.h"
 #include "Minion.h"
+#include "MinionManager.h"
 #include "StageManager.h"
 
 using namespace KamataEngine;
@@ -137,10 +138,10 @@ void GameScene::Init(StageManager* stageDataManager) {
 	// ------------------------------------------
 	// ミニオン
 	//
-	
-	modelMinion_ = Model::CreateFromOBJ("minion", true); // モデル名は適宜変更
 
-	minion_ = new Minion();
+	modelMinion_ = Model::CreateSphere(); // モデル名は適宜変更
+
+	minion_ = new MinionManager();
 	minion_->Init(modelMinion_, &camera_, mapChipField_->GetMapChipPositionByIndex(2, 2));
 	minion_->SetMapChipField(mapChipField_);
 
@@ -264,12 +265,23 @@ void GameScene::Update() {
 		// プレイヤーのインデックスを取得
 		MapChipField::IndexSet goalIdx = mapChipField_->GetMapChipIndexSetByPosition(player_->GetWorldPosition());
 
+		Vector3 minionWorldPosition = minion_->GetMinions()[0]->GetWorldPosition();
+		{
+			float m2pDistance = 10000.0f;
+			for (Minion* minion : minion_->GetMinions()) {
+				float length = Length(minion->GetWorldPosition() - player_->GetWorldPosition());
+				if (m2pDistance > length) {
+					m2pDistance = length;
+					minionWorldPosition = minion->GetWorldPosition();
+				}
+			}
+		}
 		// ミニオンとプレイヤーを結ぶ線分
 		Segment m2pSegment;
 		// ミニオンの座標
-		m2pSegment.origin = minion_->GetWorldPosition();
+		m2pSegment.origin = minionWorldPosition;
 		// プレイヤーの座標
-		m2pSegment.diff = player_->GetWorldPosition() - minion_->GetWorldPosition();
+		m2pSegment.diff = player_->GetWorldPosition() - minionWorldPosition;
 
 		bool canSeePlayer = true;
 		for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
@@ -296,7 +308,7 @@ void GameScene::Update() {
 				// インデックス適応
 				prevGoalIdx_ = goalIdx;
 				// ミニオンのインデックスを取得
-				MapChipField::IndexSet minionIdx = mapChipField_->GetMapChipIndexSetByPosition(minion_->GetWorldPosition());
+				MapChipField::IndexSet minionIdx = mapChipField_->GetMapChipIndexSetByPosition(minionWorldPosition);
 				// パスを形成
 				std::vector<MapChipField::IndexSet> path = aStar_.FindPath(minionIdx, goalIdx);
 				// パスをセット

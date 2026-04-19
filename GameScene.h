@@ -15,7 +15,7 @@
 class HitEffect;
 class GuardEffect;
 class StageManager;
-class Minion;
+class MinionManager;
 
 class GameScene {
 public:
@@ -142,7 +142,7 @@ private: // 変数
 
 	// ミニオン
 	KamataEngine::Model* modelMinion_ = nullptr;
-	Minion* minion_ = nullptr;
+	MinionManager* minion_ = nullptr;
 	MapChipField::IndexSet prevGoalIdx_ = {0, 0};
 
 	// --- VFX ---

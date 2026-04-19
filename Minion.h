@@ -1,4 +1,5 @@
 #pragma once
+#include "MinionManager.h"
 #include "MapChipField.h"
 #include <KamataEngine.h>
 #include <vector>
@@ -15,10 +16,10 @@ public:
 	~Minion() = default;
 
 	void Init(KamataEngine::Model* model, KamataEngine::Camera* camera, const KamataEngine::Vector3& startPos);
-	void Update();
+	void Update(MinionManager* manager);
 	void Draw();
 
-	// Accessor
+	// Accessor 
 	// ------------------------------------------
 
 	KamataEngine::Vector3 GetWorldPosition() const { return worldTransform_.translation_; }
@@ -32,8 +33,12 @@ public:
 private:
 
 	KamataEngine::Vector3 Limit(KamataEngine::Vector3 v, float max);
-	void Move();
+	void Move(MinionManager* manager);
+	KamataEngine::Vector3 Separation(MinionManager* manager);
+	KamataEngine::Vector3 Alignment(MinionManager* manager);
+	KamataEngine::Vector3 Cohesion(MinionManager* manager);
 	KamataEngine::Vector3 Seek(const KamataEngine::Vector3& targetPos);
+
 
 private:
 	static inline const float kMoveSpeed = 0.05f;
@@ -42,7 +47,7 @@ private:
 	static inline const float kMaxSteer = 0.005f; // ハンドルの切れやすさ
 
 	static inline const float kSeparationRange = 1.0f;	// 分離の対象半径
-	static inline const float kSeparationWeight = 0.8f; // 分離の重み付け
+	static inline const float kSeparationWeight = 0.9f; // 分離の重み付け
 
 private:
 	KamataEngine::Camera* camera_ = nullptr;
@@ -52,9 +57,14 @@ private:
 
 	// ワールドトランスフォーム
 	KamataEngine::WorldTransform worldTransform_;
+
+	// 初期座標
+	KamataEngine::Vector3 initPosition_;
 	
 	// 速度
 	KamataEngine::Vector3 velocity_;
+	KamataEngine::Vector3 goalPos_;
+	
 
 	// 経路
 	std::vector<MapChipField::IndexSet> path_;

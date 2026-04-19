@@ -12,7 +12,11 @@ void Minion::Init(KamataEngine::Model* model, KamataEngine::Camera* camera, cons
 
 	// トランスフォーム
 	worldTransform_.Initialize();
-	worldTransform_.translation_ = startPos;
+	float offsetX = (float)(rand() % 100 - 50) * 0.01f;
+	float offsetZ = (float)(rand() % 100 - 50) * 0.01f;
+
+	worldTransform_.translation_ = {startPos.x + offsetX, startPos.y, startPos.z + offsetZ};
+	goalPos_ = worldTransform_.translation_;
 	worldTransform_.scale_ = {0.4f, 0.4f, 0.4f};
 	WorldTransformUpdate(worldTransform_);
 
@@ -22,8 +26,8 @@ void Minion::Init(KamataEngine::Model* model, KamataEngine::Camera* camera, cons
 	objColor_->SetColor(Vector4{0.1f, 0.1f, 1.0f, 1.0f});
 }
 
-void Minion::Update() {
-	Move();
+void Minion::Update(MinionManager* manager) {
+	Move(manager);
 	WorldTransformUpdate(worldTransform_);
 }
 
@@ -41,20 +45,23 @@ KamataEngine::Vector3 Minion::Limit(Vector3 v, float max) {
 	return v;
 }
 
-void Minion::Move() {
-	if (path_.empty()) {
-		return;
-	}
-
-	if (currentStep_ + 1 >= (int)path_.size()) {
-		return;
-	}
-
+void Minion::Move(MinionManager* manager) {
 	// 次のゴール地点
-	Vector3 goalPos = mapChipField_->GetMapChipPositionByIndex(path_[currentStep_ + 1].xIndex, path_[currentStep_ + 1].zIndex);
+	bool canPathFinding = false;
+	// パスファインディング
+	if (!path_.empty()) {
+		// 範囲外阻止
+		if (currentStep_ + 1 < (int)path_.size()) {
+			canPathFinding = true;
+		}
+	}
+	
+	if (canPathFinding) {
+		goalPos_ = mapChipField_->GetMapChipPositionByIndex(path_[currentStep_ + 1].xIndex, path_[currentStep_ + 1].zIndex);
+	}
 
 	// 追跡行動
-	Vector3 acceleration = Seek(goalPos);
+	Vector3 acceleration = Seek(goalPos_) + Separation(manager) * kSeparationWeight;
 	velocity_ += acceleration;
 	velocity_ = Limit(velocity_, kMaxSpeed);
 	worldTransform_.translation_ += velocity_;
@@ -63,9 +70,38 @@ void Minion::Move() {
 	MapChipField::IndexSet currentIdxSet = mapChipField_->GetMapChipIndexSetByPosition(worldTransform_.translation_);
 
 	// 同じマスに到着したら次のマスを目指す。
-	if (currentIdxSet == path_[currentStep_ + 1]) {
-		currentStep_++;
+	if (canPathFinding) {
+		if (currentIdxSet == path_[currentStep_ + 1]) {
+			currentStep_++;
+		}
 	}
+}
+
+KamataEngine::Vector3 Minion::Separation(MinionManager* manager) {
+	Vector3 separation = {0, 0, 0};
+	for (Minion* other : manager->GetMinions()) {
+		if (other == this) {
+			continue;
+		}
+		// ほかのミニオン→ミニオン
+		Vector3 diff = worldTransform_.translation_ - other->GetWorldPosition();
+		float dist = Length(diff);
+		if (dist < 2.0f) {
+			separation += Normalize(diff) / dist;
+		}
+	}
+	separation = Limit(separation, kMaxSteer);
+	return separation;
+}
+
+KamataEngine::Vector3 Minion::Alignment(MinionManager* manager) {
+	manager;
+	return KamataEngine::Vector3();
+}
+
+KamataEngine::Vector3 Minion::Cohesion(MinionManager* manager) {
+	manager;
+	return KamataEngine::Vector3();
 }
 
 KamataEngine::Vector3 Minion::Seek(const KamataEngine::Vector3& targetPos) {
@@ -76,7 +112,7 @@ KamataEngine::Vector3 Minion::Seek(const KamataEngine::Vector3& targetPos) {
 	// どれくらい速度を変化させるか
 	Vector3 steer = desired - velocity_;
 
-	// 急なハンドリングを防ぐ
+	// 急カーブを防ぐ
 	steer = Limit(steer, kMaxSteer);
 
 	return steer;
