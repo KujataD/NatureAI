@@ -1,4 +1,4 @@
-#include "AStar.h"
+#include "ThetaStar.h"
 #include <algorithm>
 #include <cassert>
 #include <queue>
@@ -10,12 +10,12 @@ struct CompareFCost {
 	bool operator()(Node* a, Node* b) const { return a->f > b->f; }
 };
 
-void AStar::Init(MapChipField* mapChipField) {
+void ThetaStar::Init(MapChipField* mapChipField) {
 	assert(mapChipField);
 	mapChipField_ = mapChipField;
 }
 
-std::vector<MapChipField::IndexSet> AStar::FindPath(MapChipField::IndexSet start, MapChipField::IndexSet goal) {
+std::vector<MapChipField::IndexSet> ThetaStar::FindPath(MapChipField::IndexSet start, MapChipField::IndexSet goal) {
 	// 返り値
 	std::vector<MapChipField::IndexSet> path;
 
@@ -135,10 +135,25 @@ std::vector<MapChipField::IndexSet> AStar::FindPath(MapChipField::IndexSet start
 				stepCost = 1.0f;
 			}
 
-			neighbor->g = currentNode->g + stepCost;
+			// 斜め移動
+			if (currentNode->parent && HasLineOfSight(currentNode->parent, neighbor)) {
+
+				// 親をスキップ
+				neighbor->parent = currentNode->parent;
+
+				float newG = currentNode->parent->g + Distance(currentNode->parent, neighbor);
+
+				neighbor->g = newG;
+
+			} else {
+
+				// 通常A*
+				neighbor->parent = currentNode;
+
+				neighbor->g = currentNode->g + stepCost;
+			}
 			neighbor->h = Heuristic({(uint32_t)neighborX, (uint32_t)neighborZ}, goal);
 			neighbor->f = neighbor->g + neighbor->h;
-			neighbor->parent = currentNode;
 
 			openList.push(neighbor); // push() で追加
 			allNodes.push_back(neighbor);
@@ -153,7 +168,7 @@ std::vector<MapChipField::IndexSet> AStar::FindPath(MapChipField::IndexSet start
 	return {};
 }
 
-float AStar::Heuristic(MapChipField::IndexSet a, MapChipField::IndexSet b) const {
+float ThetaStar::Heuristic(MapChipField::IndexSet a, MapChipField::IndexSet b) const {
 	float baX = std::abs(static_cast<float>(a.xIndex) - static_cast<float>(b.xIndex));
 	float baZ = std::abs(static_cast<float>(a.zIndex) - static_cast<float>(b.zIndex));
 
@@ -165,4 +180,45 @@ float AStar::Heuristic(MapChipField::IndexSet a, MapChipField::IndexSet b) const
 		return std::sqrt(baX * baX + baZ * baZ);
 	}
 	return baX + baZ;
+}
+
+bool ThetaStar::HasLineOfSight(const Node* a, const Node* b) {
+	int ax = static_cast<int>(a->x);
+	int ay = static_cast<int>(a->y);
+	int bx = static_cast<int>(b->x);
+	int by = static_cast<int>(b->y);
+
+	int dx = abs(bx - ax);
+	int dy = abs(by - ay);
+
+	int sx = (ax < bx) ? 1 : -1;
+	int sy = (ay < by) ? 1 : -1;
+
+	int err = dx - dy;
+
+	while (true) {
+		if (!IsWalkable(ax, ay))
+			return false;
+
+		if (ax == bx && ay == by)
+			break;
+
+		int e2 = err * 2;
+		if (e2 > -dy) {
+			err -= dy;
+			ax += sx;
+		}
+		if (e2 < dx) {
+			err += dx;
+			ay += sy;
+		}
+	}
+
+	return true;
+}
+
+float ThetaStar::Distance(const Node* a, const Node* b) {
+    float dx = float(a->x - b->x);
+    float dz = float(a->y - b->y);
+    return std::sqrt(dx * dx + dz * dz);
 }

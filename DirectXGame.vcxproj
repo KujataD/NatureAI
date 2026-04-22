@@ -194,6 +194,7 @@
     <ClCompile Include="ShieldEnemyBehaviorGuard.cpp" />
     <ClCompile Include="ShieldEnemyBehaviorRoot.cpp" />
     <ClCompile Include="Skydome.cpp" />
+    <ClCompile Include="ThetaStar.cpp" />
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="SteeringBehavior.cpp" />
     <ClCompile Include="TitleScene.cpp" />
@@ -334,6 +335,7 @@
     <ClInclude Include="ShieldEnemyBehaviorGuard.h" />
     <ClInclude Include="ShieldEnemyBehaviorRoot.h" />
     <ClInclude Include="Skydome.h" />
+    <ClInclude Include="ThetaStar.h" />
     <ClInclude Include="StageManager.h" />
     <ClInclude Include="SteeringBehavior.h" />
     <ClInclude Include="TitleScene.h" />

@@ -122,7 +122,7 @@ void GameScene::Init(StageManager* stageDataManager) {
 	//
 
 	mapChipField_ = new MapChipField;
-	aStar_.Init(mapChipField_);
+	tStar_.Init(mapChipField_);
 	// 現在のステージデータを取得する
 	const StageData& stageData = stageManager_->GetCurrentStageData();
 	// ステージファイルパスの生成
@@ -303,20 +303,20 @@ void GameScene::Update() {
 				break;
 			}
 		}
-		if (canSeePlayer) {
-			if (goalIdx != prevGoalIdx_) {
-				// インデックス適応
-				prevGoalIdx_ = goalIdx;
-				// ミニオンのインデックスを取得
-				MapChipField::IndexSet minionIdx = mapChipField_->GetMapChipIndexSetByPosition(minionWorldPosition);
-				// パスを形成
-				std::vector<MapChipField::IndexSet> path = aStar_.FindPath(minionIdx, goalIdx);
-				// パスをセット
-				minion_->SetPas(path);
-				// パスをカラー付けする
-				PaintPath(path);
-			}
+		if (goalIdx != prevGoalIdx_) {
+			// インデックス適応
+			prevGoalIdx_ = goalIdx;
+			// ミニオンのインデックスを取得
+			MapChipField::IndexSet minionIdx = mapChipField_->GetMapChipIndexSetByPosition(minionWorldPosition);
+			// パスを形成
+			std::vector<MapChipField::IndexSet> path = tStar_.FindPath(minionIdx, goalIdx);
+			// パスをセット
+			minion_->SetPas(path);
+			// パスをカラー付けする
+			PaintPath(path);
 		}
+		// if (canSeePlayer) {
+		// }
 		minion_->Update();
 
 		// エネミーの更新

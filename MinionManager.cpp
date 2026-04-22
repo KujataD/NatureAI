@@ -9,6 +9,7 @@ void MinionManager::Init(KamataEngine::Model* model, KamataEngine::Camera* camer
 		Minion* minion;
 		minion = new Minion;
 		minion->Init(model, camera, startPos);
+		minion->SetColor({0.1f, 0.1f, 1.0f, 1.0f});
 		minions_.push_back(minion);
 	}
 }

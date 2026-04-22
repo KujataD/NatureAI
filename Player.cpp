@@ -506,13 +506,13 @@ void Player::BehaviorRootUpdate() {
 	ApplyCollision(collisionMapInfo);
 
 	// 天井に当たったとき
-	OnCeiling(collisionMapInfo);
+	//OnCeiling(collisionMapInfo);
 
 	// 壁に当たったとき
-	OnWall(collisionMapInfo);
+	//OnWall(collisionMapInfo);
 
 	// 接地状態の切り替え
-	UpdateGroundState(collisionMapInfo);
+	//UpdateGroundState(collisionMapInfo);
 
 	// 旋回制御
 	TurnControl();

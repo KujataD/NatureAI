@@ -23,7 +23,6 @@ void Minion::Init(KamataEngine::Model* model, KamataEngine::Camera* camera, cons
 	// オブジェクトカラー
 	objColor_ = new ObjectColor;
 	objColor_->Initialize();
-	objColor_->SetColor(Vector4{0.1f, 0.1f, 1.0f, 1.0f});
 }
 
 void Minion::Update(MinionManager* manager) {
@@ -55,7 +54,7 @@ void Minion::Move(MinionManager* manager) {
 			canPathFinding = true;
 		}
 	}
-	
+
 	if (canPathFinding) {
 		goalPos_ = mapChipField_->GetMapChipPositionByIndex(path_[currentStep_ + 1].xIndex, path_[currentStep_ + 1].zIndex);
 	}
@@ -66,11 +65,11 @@ void Minion::Move(MinionManager* manager) {
 	velocity_ = Limit(velocity_, kMaxSpeed);
 	worldTransform_.translation_ += velocity_;
 
-	// 現時点のインデックスセット
-	MapChipField::IndexSet currentIdxSet = mapChipField_->GetMapChipIndexSetByPosition(worldTransform_.translation_);
-
 	// 同じマスに到着したら次のマスを目指す。
 	if (canPathFinding) {
+		// 現時点のインデックスセット
+		MapChipField::IndexSet currentIdxSet = mapChipField_->GetMapChipIndexSetByPosition(worldTransform_.translation_);
+
 		if (currentIdxSet == path_[currentStep_ + 1]) {
 			currentStep_++;
 		}
@@ -78,16 +77,16 @@ void Minion::Move(MinionManager* manager) {
 }
 
 KamataEngine::Vector3 Minion::Separation(MinionManager* manager) {
-	Vector3 separation = {0, 0, 0};
+	Vector3 separation = {0.0f, 0.0f, 0.0f};
 	for (Minion* other : manager->GetMinions()) {
 		if (other == this) {
 			continue;
 		}
 		// ほかのミニオン→ミニオン
-		Vector3 diff = worldTransform_.translation_ - other->GetWorldPosition();
-		float dist = Length(diff);
-		if (dist < 2.0f) {
-			separation += Normalize(diff) / dist;
+		Vector3 difference = worldTransform_.translation_ - other->GetWorldPosition();
+		float distance = Length(difference);
+		if (distance < 2.0f) {
+			separation += Normalize(difference) / distance;
 		}
 	}
 	separation = Limit(separation, kMaxSteer);

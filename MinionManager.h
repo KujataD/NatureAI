@@ -14,7 +14,6 @@ public:
 
 	void SetPas(const std::vector<MapChipField::IndexSet>& path);
 
-
 	void SetPushMinion(Minion* pushMinion) { minions_.push_back(pushMinion); }
 
 	std::vector<MapChipField::IndexSet> GetPath() const { return path_; }

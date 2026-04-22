@@ -1,5 +1,5 @@
 #pragma once
-#include "AStar.h"
+#include "ThetaStar.h"
 #include "BaseEnemy.h"
 #include "CameraController.h"
 #include "DeathParticles.h"
@@ -93,7 +93,7 @@ private: // 変数
 	KamataEngine::ObjectColor* wallColor_ = nullptr;
 
 	// A*
-	AStar aStar_;
+	ThetaStar tStar_;
 
 	// ブロックのワールドトランスフォーム
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;

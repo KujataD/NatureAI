@@ -34,8 +34,26 @@ private:
 
 	KamataEngine::Vector3 Limit(KamataEngine::Vector3 v, float max);
 	void Move(MinionManager* manager);
+
+	/// <summary>
+	/// 分離
+	/// </summary>
+	/// <param name="manager"></param>
+	/// <returns></returns>
 	KamataEngine::Vector3 Separation(MinionManager* manager);
+	
+	/// <summary>
+	/// 整列
+	/// </summary>
+	/// <param name="manager"></param>
+	/// <returns></returns>
 	KamataEngine::Vector3 Alignment(MinionManager* manager);
+	
+	/// <summary>
+	/// 結束
+	/// </summary>
+	/// <param name="manager"></param>
+	/// <returns></returns>
 	KamataEngine::Vector3 Cohesion(MinionManager* manager);
 	KamataEngine::Vector3 Seek(const KamataEngine::Vector3& targetPos);
 
@@ -47,7 +65,7 @@ private:
 	static inline const float kMaxSteer = 0.005f; // ハンドルの切れやすさ
 
 	static inline const float kSeparationRange = 1.0f;	// 分離の対象半径
-	static inline const float kSeparationWeight = 0.9f; // 分離の重み付け
+	static inline const float kSeparationWeight = 0.7f; // 分離の重み付け
 
 private:
 	KamataEngine::Camera* camera_ = nullptr;

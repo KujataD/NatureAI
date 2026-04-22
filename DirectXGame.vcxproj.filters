@@ -73,9 +73,6 @@
     <Filter Include="ソース ファイル\Algorithm\AI\NavigationAI">
       <UniqueIdentifier>{bccd9bf6-e143-48bc-9b3f-be05da4baceb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Algorithm\AI\NavigationAI\AStar">
-      <UniqueIdentifier>{b7ca3cd8-dbf1-4715-9b5e-86abf7e18718}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Algorithm\AI\CharactorAI">
       <UniqueIdentifier>{81038c01-19c8-4dc0-a340-e9e166a091fb}</UniqueIdentifier>
     </Filter>
@@ -84,6 +81,9 @@
     </Filter>
     <Filter Include="ソース ファイル\Algorithm\AI\NavigationAI\SteeringBehavior">
       <UniqueIdentifier>{dced9f35-cb95-4753-af9f-a2949d48f08d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Algorithm\AI\NavigationAI\PathFinding">
+      <UniqueIdentifier>{b7ca3cd8-dbf1-4715-9b5e-86abf7e18718}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,7 +181,7 @@
       <Filter>ソース ファイル\Stage</Filter>
     </ClCompile>
     <ClCompile Include="AStar.cpp">
-      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\AStar</Filter>
+      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\PathFinding</Filter>
     </ClCompile>
     <ClCompile Include="Minion.cpp">
       <Filter>ソース ファイル\GameObject\Minion</Filter>
@@ -197,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="MinionManager.cpp">
       <Filter>ソース ファイル\GameObject\Minion</Filter>
+    </ClCompile>
+    <ClCompile Include="ThetaStar.cpp">
+      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\PathFinding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,7 +355,7 @@
       <Filter>ソース ファイル\Stage</Filter>
     </ClInclude>
     <ClInclude Include="AStar.h">
-      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\AStar</Filter>
+      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\PathFinding</Filter>
     </ClInclude>
     <ClInclude Include="Minion.h">
       <Filter>ソース ファイル\GameObject\Minion</Filter>
@@ -371,6 +374,9 @@
     </ClInclude>
     <ClInclude Include="MinionManager.h">
       <Filter>ソース ファイル\GameObject\Minion</Filter>
+    </ClInclude>
+    <ClInclude Include="ThetaStar.h">
+      <Filter>ソース ファイル\Algorithm\AI\NavigationAI\PathFinding</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
